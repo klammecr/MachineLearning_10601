@@ -71,7 +71,7 @@ class MajorityVoteClassifier:
             data (np.ndarray): The data structure
         """
         labels   = data[:, -1]
-        self.cls = int(np.round(np.mean(labels), 0))
+        self.cls = int(np.sum(labels == 1) >= np.sum(labels == 0))
 
     def infer(self, data_entry):
         """Predict a classificaiton for the given data
