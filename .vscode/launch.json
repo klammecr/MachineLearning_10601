@@ -10,6 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
+            "args": ["hw1/handout/heart_train.tsv", "hw1/handout/heart_test.tsv", "hw1/output/heart_train_preds.txt", "hw1/output/heart_test_preds.txt", "hw1/output/heart_metrics.txt"],
             "justMyCode": true
         }
     ]

@@ -57,14 +57,98 @@ class DataInterface:
             return_data = self.data[np.where(data_mask == 1)].reshape(self.data.shape[0], np.sum(columns[0, :]))
 
         return return_data
-            
 
-            
+class MajorityVoteClassifier:
+    """Create a classifier based on which label occurs most often
+    """
+    def __init__(self) -> None:
+        self.cls = None
 
+    def fit(self, data):
+        """Train the classifier based on the data
+
+        Args:
+            data (np.ndarray): The data structure
+        """
+        labels   = data[:, -1]
+        self.cls = int(np.round(np.mean(labels), 0))
+
+    def infer(self, data_entry):
+        """Predict a classificaiton for the given data
+
+        Args:
+            data_entry (np.ndarray): The data (features) to base the prediciton on
+
+        Returns:
+            _type_: _description_
+        """
+        return self.cls
+
+def write_labels(data, classifier, out_file):
+    """Write the predicted labels for each entry in the dataset
+
+    Args:
+        data (np.ndarray): The data to write the predictions for
+        classifier (MajorityVoteClassifier): The classifier to compute the predicted labels
+        out_file (string): The file where to write the labels (delimited by \n)
+
+    Raises:
+        ValueError: _description_
+    """
+    with open(out_file, "w+") as f:
+        for entry in data:
+            pred = classifier.infer(entry)
+            f.write(f"{pred}\n")
+
+def read_preds(label_file):
+    """Read the label prediction files
+
+    Args:
+        label_file (string): The label file to read
+
+    Returns:
+        np.ndarray: Labels in a numpy array
+    """
+    preds = []
+    with open(label_file, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            preds.append(int(line[0]))
+    return np.array(preds)
+
+def calc_error(pred_file, labels):
+    """Calculate the percent error for a given prediction and label set
+
+    Args:
+        pred_file (string): The file of label predictions
+        labels (np.ndarray): The labels of the dataset
+
+    Returns:    
+        float: The error for the given set
+    """
+    preds = read_preds(pred_file)
+    error = np.sum(np.abs(preds - labels)) / np.prod(np.size(labels))
+    return error
+
+def write_error(train_pred_file, train_labels, test_pred_file, test_labels, out_file):
+    """Write the error of the test set and train set to a file
+
+    Args:
+        train_pred_file (string): The predicitons for the train set
+        train_labels (np.ndarray): The labels for the train set
+        test_pred_file (string): The predictions for the test set 
+        test_labels (np.ndarray): The labels for the test set
+        out_file (string): The outfile for the metrics
+    """
+    train_error = calc_error(train_pred_file, train_labels)
+    test_error  = calc_error(test_pred_file, test_labels)
+    with open(out_file, "w+") as f:
+        f.write(f"error(train): {train_error}\n")
+        f.write(f"error(test): {test_error}")
 
 
 if __name__ == "__main__":
-    # Handle CLI arguments
+    # 1.2.3: Handle CLI arguments
     if len(sys.argv) == 6:
         train_input = sys.argv[1]
         test_input  = sys.argv[2]
@@ -74,6 +158,22 @@ if __name__ == "__main__":
     else:
         raise ValueError("Please pass in five command line arguments: python majority_vote.py <train_input> <test_input> <train_out> <test_out> <metrics_out>")
 
+    # 1.2.2: Read the data and format it to be ussable by the algorithm
     interface = DataInterface()
-    interface.read_tsv("hw1/handout/heart_train.tsv")
-    interface.get_data(["sex", "chest_pain"])
+    interface.read_tsv(train_input)
+    train_data = interface.get_data()
+
+    # Train the classifier
+    mv_cls = MajorityVoteClassifier()
+    mv_cls.fit(train_data)
+
+    # Grab the test set
+    interface.read_tsv(test_input)
+    test_data = interface.get_data()
+
+    # 1.2.4: Write the predicted labels to a file for the training set and the test set
+    write_labels(train_data, mv_cls, train_out)
+    write_labels(test_data, mv_cls, test_out)
+
+    # 1.2.5: Calculate the metrics and write them to a file
+    write_error(train_out, train_data[:, -1], test_out, test_data[:, -1], met_out)
