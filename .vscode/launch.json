@@ -5,12 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: Inspection",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/small_train.tsv", "hw2/output/small_inspect.txt"],
+            "justMyCode": true
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["hw1/handout/heart_train.tsv", "hw1/handout/heart_test.tsv", "hw1/output/heart_train_preds.txt", "hw1/output/heart_test_preds.txt", "hw1/output/heart_metrics.txt"],
+            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "3", "hw2/output/heart_train_preds.txt", "hw2/output/heart_test_preds.txt", "hw2/output/heart_metrics.txt"],
             "justMyCode": true
         }
     ]

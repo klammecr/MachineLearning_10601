@@ -1,24 +1,11 @@
 # Third Party
-from enum import unique
-from multiprocessing.sharedctypes import Value
 import sys
-from math import log2
 import numpy as np
 
-def calc_entropy(labels):
-    """
-    Calculate the entropy of the group of data.
-    Format: [x0,..., xn, y]
-    """
-    entropy     = 0
-    unique_lbls = np.unique(labels)
-    total_lbls  = len(labels)
-    for lbl in unique_lbls:
-        # Calculate the contribution then update the entropy
-        val_percentage = len(np.where(labels == lbl)) / total_lbls
-        entropy       -= val_percentage * log2(val_percentage)
+# In House
+from majority_vote import DataInterface
 
-    return entropy
+
 
 def calc_mi(data, attr):
     """
@@ -64,6 +51,13 @@ if __name__ == '__main__':
         metrics_out = sys.argv[6]
     else:
         raise ValueError("python decision_tree.py <train input> <testinput> <max depth> <train out> <test out> <metrics out>")
+
+    # Read the training file
+    data_interface = DataInterface()
+    data_interface.read_tsv(train_input)
+    data = data_interface.get_data()
+    lbls = data[:, -1]
+    calc_entropy(lbls)
 
     # Create a decision tree object
     dt = DecisionTree(max_depth)
