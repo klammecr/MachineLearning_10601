@@ -23,11 +23,14 @@ class DataInterface:
 
                 # The first line is just labels, keep them as strings
                 if idx == 0:
-                    self.labels = features
+                    self.headers = features
                 else:
                     features = [int(feature) for feature in features]
                     data.append(features) # fine for now, may want to support floats later
             self.data = np.array(data)
+
+    def get_headers(self):
+        return np.array(self.headers)
 
     def get_data(self, keys = None):
         """Return the data
@@ -49,7 +52,7 @@ class DataInterface:
             # Find the matching columns
             columns = np.zeros(self.data.shape[1], dtype=bool)
             for key in keys:
-                columns[np.where(np.array(self.labels) == key)] = 1
+                columns[np.where(np.array(self.headers) == key)] = 1
 
             # Create a mask by repeating the 1s and 0s down all the rows
             columns     = np.resize(columns,  (1, len(columns)))
