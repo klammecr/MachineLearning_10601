@@ -1,11 +1,12 @@
 # Third Party
+from asyncore import write
 from posixpath import split
 import sys
 import numpy as np
 
 # In House
 from inspection import calc_entropy
-from majority_vote import DataInterface, MajorityVoteClassifier
+from majority_vote import DataInterface, MajorityVoteClassifier, calc_error, write_error
 
 def calc_mi(data, lbls, hdrs, attr):
     """
@@ -190,4 +191,5 @@ if __name__ == '__main__':
     test_preds = dt.predict_batch(tree, test_data, test_hdrs)
     write_preds(test_out, test_preds)
 
-
+    # Write the metrics
+    write_error(train_out, y, test_out, test_data[:, -1], metrics_out)
