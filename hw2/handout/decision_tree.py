@@ -41,12 +41,39 @@ def calc_mi(data, lbls, hdrs, attr):
 class DecisionTree:
     def __init__(self, max_depth):
         self.max_depth = int(max_depth)
-        self.root      = Node()
         self.mvc       = MajorityVoteClassifier()
+        self.tree      = None
 
     def fit(self, X, y, hdrs):
-        return self.recurse_tree(X, y, hdrs)
+        self.tree = self.recurse_tree(X, y, hdrs)
+        return self.tree
 
+    def predict_batch(self, node, X_test, test_hdrs):
+        preds = []
+        for sample in X_test:
+            sample_dict = create_sample_dict(sample, test_hdrs)
+            preds.append(self.predict(tree, sample_dict))
+        return preds
+
+    def predict(self, node, X_dict):
+        if node is None:
+            return None
+
+        # Return value
+        ret = None
+
+        # Base case, node is a leaf node
+        if node.vote is not None:
+            ret =  node.vote
+        # Recursive Step:
+        else:
+            if node.attr in X_dict.keys():
+                attr_val = X_dict[node.attr]
+                if attr_val == 0:
+                    ret = self.predict(node.right, X_dict)
+                else:
+                    ret = self.predict(node.left, X_dict)
+        return ret
 
     def recurse_tree(self, X, y, hdrs, depth = 0):
         # Create a node for the current branch
@@ -76,13 +103,15 @@ class DecisionTree:
 
             # Find out which feature had the highest mutual information
             split_idx = np.argmax(np.array(list(attr_mi.values())))
+            curr.attr = hdrs[split_idx] # Mark the split attribute for the current node
+
+            # Mark the headers that are left after the split
+            remaining_hdrs = np.r_[hdrs[:split_idx], hdrs[split_idx+1:]]
 
             # Take each value for this feature (0 or 1)
             # Left child always corresponds to 1, Right child always corresponds to 0
             left_idxs  = X[:, split_idx] == 1
             right_idxs = X[:, split_idx] == 0
-
-            remaining_hdrs = np.r_[hdrs[:split_idx], hdrs[split_idx+1:]]
 
             # Recursion and printing for debugging
             pipes = "| " * (depth + 1)
@@ -109,6 +138,18 @@ class Node:
         self.attr = None
         self.vote = None
 
+def create_sample_dict(sample, hdrs):
+    out = {}
+    for idx, hdr in enumerate(hdrs):
+        out[hdr] = sample[idx]
+    return out
+
+def write_preds(file, preds):
+    # Write the test results to a file
+    with open(file, "w+") as f:
+        for pred in preds:
+            f.write(f"{pred}\n")
+
 if __name__ == '__main__':
     
     # Arguments: <train input> <testinput> <max depth> <train out> <test out> <metrics out>.
@@ -125,13 +166,28 @@ if __name__ == '__main__':
     # Read the training file
     data_interface = DataInterface()
     data_interface.read_tsv(train_input)
-    data = data_interface.get_data()
+    train_data = data_interface.get_data()
     hdrs = data_interface.get_headers()
-    X = data[:, :-1]
-    y = data[:, -1]
+    X = train_data[:, :-1]
+    y = train_data[:, -1]
     hdrs = hdrs[:-1]
+
 
     # Create a decision tree object
     dt = DecisionTree(max_depth)
     tree = dt.fit(X, y, hdrs)
-    pass
+
+    # Write the predictions of the training set
+    train_preds = dt.predict_batch(tree, train_data, hdrs)
+    write_preds(train_out, train_preds)
+
+    # Read the test data
+    data_interface.read_tsv(test_input)
+    test_data  = data_interface.get_data()
+    test_hdrs  = data_interface.get_headers()
+
+    # Write the predictions of the test set
+    test_preds = dt.predict_batch(tree, test_data, test_hdrs)
+    write_preds(test_out, test_preds)
+
+
