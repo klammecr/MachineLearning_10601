@@ -14,12 +14,21 @@
             "justMyCode": true
         },
         {
-            "name": "Python: Current File",
+            "name": "Python: HW2: Small Dataset",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "3", "hw2/output/heart_train_preds.txt", "hw2/output/heart_test_preds.txt", "hw2/output/heart_metrics.txt"],
+            "args": ["hw2/handout/small_train.tsv", "hw2/handout/small_test.tsv", "2", "hw2/output/small_3_train.txt", "hw2/output/small_3_test.txt", "hw2/output/train_3_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Education Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "3", "hw2/output/edu_3_train.txt", "hw2/output/edu_3_test.txt", "hw2/output/edu_3_metrics.txt"],
             "justMyCode": true
         }
     ]

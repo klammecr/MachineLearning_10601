@@ -67,14 +67,13 @@ class MajorityVoteClassifier:
     def __init__(self) -> None:
         self.cls = None
 
-    def fit(self, data):
+    def fit(self, lbls):
         """Train the classifier based on the data
 
         Args:
             data (np.ndarray): The data structure
         """
-        labels   = data[:, -1]
-        self.cls = int(np.sum(labels == 1) >= np.sum(labels == 0))
+        self.cls = int(np.sum(lbls == 1) >= np.sum(lbls == 0))
 
     def infer(self):
         """Predict a classificaiton for the given data
@@ -180,7 +179,7 @@ if __name__ == "__main__":
 
     # Train the classifier
     mv_cls = MajorityVoteClassifier()
-    mv_cls.fit(train_data)
+    mv_cls.fit(train_data[:, -1])
 
     # Grab the test set
     interface.read_tsv(test_input)
