@@ -5,8 +5,7 @@ import sys
 import numpy as np
 
 # In House
-from inspection import calc_entropy
-from majority_vote import DataInterface, MajorityVoteClassifier, calc_error, write_error
+from inspection import calc_entropy, DataInterface, MajorityVoteClassifier, write_error
 
 def calc_mi(data, lbls, hdrs, attr):
     """
