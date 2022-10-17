@@ -1,0 +1,2 @@
+error(train): 0.01
+error(test): 0.015

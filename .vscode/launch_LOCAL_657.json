@@ -29,20 +29,15 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "0", "hw2/output/edu_0_train.txt", "hw2/output/edu_0_test.txt", "hw2/output/edu_0_metrics.txt"],
+            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "3", "hw2/output/edu_3_train.txt", "hw2/output/edu_3_test.txt", "hw2/output/edu_3_metrics.txt"],
             "justMyCode": true
         },
         {
-<<<<<<< HEAD
             "name": "Python: HW4: Feature",
-=======
-            "name": "Python: HW2: Heart Dataset",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
             "hw4/largedata/train_large.tsv", 
             "hw4/largedata/val_large.tsv",
@@ -73,18 +68,10 @@
         },
         {
             "name": "Python: HW4: Logistic Regression Small",
-=======
-            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "4", "hw2/output/heart_4_train.txt", "hw2/output/heart_4_test.txt", "hw2/output/heart_4_metrics.txt"],
-            "justMyCode": true
-        },
-        {
-            "name": "Python: HW2: Plotting Max Depths, User Defined Depths",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
                 "hw4/smalloutput/formatted_train_small.tsv",
                 "hw4/smalloutput/formatted_val_small.tsv",
@@ -99,18 +86,10 @@
         },
         {
             "name": "Python: HW4: Question 7",
-=======
-            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "[1,2,4]", "hw2/output"],
-            "justMyCode": true
-        },
-        {
-            "name": "Python: HW2: Plotting Max Depths, All Depths for Dataset (Number of Features)",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
                 "hw4/largeoutput/formatted_train_large.tsv",
                 "hw4/largeoutput/formatted_val_large.tsv",
@@ -123,19 +102,5 @@
             ],
             "justMyCode": true            
         }
-=======
-            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "hw2/output"],
-            "justMyCode": true
-        },
-        {
-            "name": "Python: HW2: Q1",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "args": ["hw2/handout/q1_train.tsv", "hw2/handout/q1_train.tsv", "3", "hw2/output/q1_train.txt", "hw2/output/q1_test.txt", "hw2/output/q1_metrics.txt"],
-            "justMyCode": true
-        }   
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
     ]
 }

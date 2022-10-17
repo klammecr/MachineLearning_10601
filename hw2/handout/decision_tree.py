@@ -1,8 +1,8 @@
 # Third Party
-from asyncore import write
-from posixpath import split
 import sys
 import numpy as np
+import os
+from matplotlib import pyplot as plt
 
 # In House
 from inspection import calc_entropy, DataInterface, MajorityVoteClassifier, write_error
@@ -52,7 +52,7 @@ class DecisionTree:
         preds = []
         for sample in X_test:
             sample_dict = create_sample_dict(sample, test_hdrs)
-            preds.append(self.predict(tree, sample_dict))
+            preds.append(self.predict(node, sample_dict))
         return preds
 
     def predict(self, node, X_dict):
@@ -150,19 +150,17 @@ def write_preds(file, preds):
         for pred in preds:
             f.write(f"{pred}\n")
 
-if __name__ == '__main__':
-    
-    # Arguments: <train input> <testinput> <max depth> <train out> <test out> <metrics out>.
-    if len(sys.argv) == 7:
-        train_input = sys.argv[1]
-        test_input  = sys.argv[2]
-        max_depth   = sys.argv[3]
-        train_out   = sys.argv[4]
-        test_out    = sys.argv[5]
-        metrics_out = sys.argv[6]
-    else:
-        raise ValueError("python decision_tree.py <train input> <testinput> <max depth> <train out> <test out> <metrics out>")
+def run_decision_tree(train_input, test_input, max_depth, train_out, test_out, metrics_out):
+    """
+    Run the decision tree algorithm
 
+    :param train_input: The filepath to the train set
+    :param test_input:  The filepath to the test set
+    :param max_depth:   Maximum depth of the tree
+    :param train_out:   Where to output the predicted labels of the train set
+    :param test_out:    Where to output the predicted labels of the test set
+    :param metrics_out: Where to output the train and test error metrics
+    """
     # Read the training file
     data_interface = DataInterface()
     data_interface.read_tsv(train_input)
@@ -191,4 +189,93 @@ if __name__ == '__main__':
     write_preds(test_out, test_preds)
 
     # Write the metrics
-    write_error(train_out, y, test_out, test_data[:, -1], metrics_out)
+    train_error, test_error = write_error(train_out, y, test_out, test_data[:, -1], metrics_out)
+
+    return train_error, test_error
+
+def str_to_int_array(str):
+    """
+    Quick and dirty string array to numeric array
+
+    :param str: String list ex: "[1,2,3]"
+
+    Returns: list: Example: [1,2,3]
+    """
+    arr  = []
+    junk = True
+    for char in str:
+        if char == "]":
+            return arr
+        elif char == "[":
+            junk = False
+        else:
+            if not junk and char.isnumeric():
+                arr.append(int(char))
+
+def plot_max_depths(train_input, test_input, depths, out_path):
+    # Array of collected training and testing errors
+    train_errors = []
+    test_errors  = []
+
+    # Datset identifier for output files
+    dataset_str = os.path.split(train_input)[-1][0:5]
+
+    # Use all possible depths depending on the size of the dataset
+    if not depths:
+        # Not the cleanest way, but this is not industry/research code, ideally we would frontload some computation or reuse some computation
+        data_interface = DataInterface()
+        data_interface.read_tsv(train_input)
+        train_data = data_interface.get_data()
+        depths = list(range(train_data.shape[1] + 1))
+    # Convert string array ex: "[1,2,3]" to a real python list
+    else:
+        depths = str_to_int_array(depths)
+
+    for depth in depths:
+        out_train = out_path + "/" + f"{dataset_str}_{depth}_train.txt"
+        out_test  = out_path + "/" + f"{dataset_str}_{depth}_test.txt"
+        out_met   = out_path + "/" + f"{dataset_str}_{depth}_metrics.txt"
+
+        # Run for a given depth
+        train_error, test_error = run_decision_tree(train_input, test_input, depth, out_train, out_test, out_met)
+
+        # Add to the list to be plotted
+        train_errors.append(train_error)
+        test_errors.append(test_error)
+
+    plt.title("Training and Test Error vs. Decision Tree Max Depth")
+    plt.plot(depths, train_errors, "ko--", label = "Train Error")
+    plt.plot(depths, test_errors, "rx-",   label = "Test Error")
+    plt.xlabel("Max Depth of Decision Tree")
+    plt.ylabel("Percent Error")
+    plt.legend(loc = "upper right")
+    plt.show()
+    plt.savefig(f"{out_path}/{dataset_str}.png")
+    
+
+if __name__ == '__main__':
+    
+    # Base Homework Use Case
+    if len(sys.argv) == 7:
+        train_input = sys.argv[1]
+        test_input  = sys.argv[2]
+        max_depth   = sys.argv[3]
+        train_out   = sys.argv[4]
+        test_out    = sys.argv[5]
+        metrics_out = sys.argv[6]
+        run_decision_tree(train_input, test_input, max_depth, train_out, test_out, metrics_out)
+    # Plotting over the max_depth hyperparameter
+    elif len(sys.argv) == 5:
+        train_input = sys.argv[1]
+        test_input  = sys.argv[2]
+        max_depths  = sys.argv[3]
+        out_path    = sys.argv[4]
+        plot_max_depths(train_input, test_input, max_depths, out_path)
+    elif len(sys.argv) == 4:
+        train_input = sys.argv[1]
+        test_input  = sys.argv[2]
+        out_path    = sys.argv[3]
+        plot_max_depths(train_input, test_input, [], out_path)        
+    else:
+        raise ValueError("python decision_tree.py <train input> <test input> <max depth> <train out> <test out> <metrics out>")
+

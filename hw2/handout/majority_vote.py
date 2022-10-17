@@ -159,7 +159,7 @@ def write_error(train_pred_file, train_labels, test_pred_file, test_labels, out_
     with open(out_file, "w+") as f:
         f.write(f"error(train): {train_error}\n")
         f.write(f"error(test): {test_error}")
-
+    return train_error, test_error
 
 if __name__ == "__main__":
     # 1.2.3: Handle CLI arguments
