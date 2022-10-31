@@ -4,6 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+    
 
         {
             "name": "Python: Inspection",
@@ -33,16 +34,11 @@
             "justMyCode": true
         },
         {
-<<<<<<< HEAD
             "name": "Python: HW4: Feature",
-=======
-            "name": "Python: HW2: Heart Dataset",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
             "hw4/largedata/train_large.tsv", 
             "hw4/largedata/val_large.tsv",
@@ -73,18 +69,10 @@
         },
         {
             "name": "Python: HW4: Logistic Regression Small",
-=======
-            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "4", "hw2/output/heart_4_train.txt", "hw2/output/heart_4_test.txt", "hw2/output/heart_4_metrics.txt"],
-            "justMyCode": true
-        },
-        {
-            "name": "Python: HW2: Plotting Max Depths, User Defined Depths",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
                 "hw4/smalloutput/formatted_train_small.tsv",
                 "hw4/smalloutput/formatted_val_small.tsv",
@@ -99,18 +87,10 @@
         },
         {
             "name": "Python: HW4: Question 7",
-=======
-            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "[1,2,4]", "hw2/output"],
-            "justMyCode": true
-        },
-        {
-            "name": "Python: HW2: Plotting Max Depths, All Depths for Dataset (Number of Features)",
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-<<<<<<< HEAD
             "args": [
                 "hw4/largeoutput/formatted_train_large.tsv",
                 "hw4/largeoutput/formatted_val_large.tsv",
@@ -122,20 +102,22 @@
                 "0.001"
             ],
             "justMyCode": true            
-        }
-=======
-            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "hw2/output"],
-            "justMyCode": true
         },
         {
-            "name": "Python: HW2: Q1",
+            "name": "Python: HW5 Small Dataset",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
-            "args": ["hw2/handout/q1_train.tsv", "hw2/handout/q1_train.tsv", "3", "hw2/output/q1_train.txt", "hw2/output/q1_test.txt", "hw2/output/q1_metrics.txt"],
-            "justMyCode": true
-        }   
->>>>>>> d87487d8c7f0f56e325bc8f1330cf097149cc84e
+            "args": [
+                "hw5/small_train.csv",
+                "hw5/small_validation.csv",
+                "small_train_out.labels",
+                "small_validation_out.labels",
+                "small_metrics_out.txt",
+                "1", "4", "2", "0.1"
+            ],
+            "justMyCode": true       
+        }
     ]
 }
