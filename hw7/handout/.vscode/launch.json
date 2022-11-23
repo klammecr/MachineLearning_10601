@@ -1,0 +1,72 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "HW7: Training",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "toy_data/train.txt",
+                "toy_data/index_to_word.txt",
+                "toy_data/index_to_tag.txt",
+                "toy_data/hmminit.txt",
+                "toy_data/hmmemit.txt",
+                "toy_data/hmmtrans.txt"
+            ]
+        },
+        {
+            "name": "HW7: Evaluation",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "toy_data/validation.txt",
+                "toy_data/index_to_word.txt",
+                "toy_data/index_to_tag.txt",
+                "toy_data/hmminit.txt",
+                "toy_data/hmmemit.txt",
+                "toy_data/hmmtrans.txt",
+                "toy_data/predicted.txt",
+                "toy_data/metrics.txt"
+            ]
+        },
+        {
+        "name": "HW7: Train FR Dataset",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal",
+        "args" : [
+            "fr_data/train.txt",
+            "fr_data/index_to_word.txt",
+            "fr_data/index_to_tag.txt",
+            "fr_hmmfb_output/hmminit.txt",
+            "fr_hmmfb_output/hmmemit.txt",
+            "fr_hmmfb_output/hmmtrans.txt"
+        ]
+        },
+        {
+            "name": "HW7: Eval FR Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "fr_data/validation.txt",
+                "fr_data/index_to_word.txt",
+                "fr_data/index_to_tag.txt",
+                "fr_hmmfb_output/hmminit.txt",
+                "fr_hmmfb_output/hmmemit.txt",
+                "fr_hmmfb_output/hmmtrans.txt",
+                "fr_hmmfb_output/predicted.txt",
+                "fr_hmmfb_output/metrics.txt"
+            ]
+        }
+    ]
+}
