@@ -67,6 +67,24 @@
                 "fr_hmmfb_output/predicted.txt",
                 "fr_hmmfb_output/metrics.txt"
             ]
+        },
+        {
+            "name": "HW7: EN Empirical",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "en_data/train.txt",
+                "en_data/index_to_word.txt",
+                "en_data/index_to_tag.txt",
+                "en_output/hmminit.txt",
+                "en_output/hmmemit.txt",
+                "en_output/hmmtrans.txt",
+                "en_data/validation.txt",
+                "en_output/predicted.txt",
+                "en_output/metrics.txt"
+            ]
         }
     ]
 }

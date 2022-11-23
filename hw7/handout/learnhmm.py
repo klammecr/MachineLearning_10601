@@ -2,7 +2,7 @@ import argparse
 import numpy as np
 
 
-def get_inputs():
+def get_inputs(args = None):
     """
     Collects all the inputs from the command line and returns the data. To use this function:
 
@@ -24,15 +24,16 @@ def get_inputs():
         trans_out --> A file path to which you should write your transition probabilities
     
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("train_input", type=str)
-    parser.add_argument("index_to_word", type=str)
-    parser.add_argument("index_to_tag", type=str)
-    parser.add_argument("hmmprior", type=str)
-    parser.add_argument("hmmemit", type=str)
-    parser.add_argument("hmmtrans", type=str)
+    if not args:
+        parser = argparse.ArgumentParser()
+        parser.add_argument("train_input", type=str)
+        parser.add_argument("index_to_word", type=str)
+        parser.add_argument("index_to_tag", type=str)
+        parser.add_argument("hmmprior", type=str)
+        parser.add_argument("hmmemit", type=str)
+        parser.add_argument("hmmtrans", type=str)
 
-    args = parser.parse_args()
+        args = parser.parse_args()
 
     train_data = list()
     with open(args.train_input, "r") as f:
@@ -49,13 +50,11 @@ def get_inputs():
     
     return train_data, words_to_indices, tags_to_indices, args.hmmprior, args.hmmemit, args.hmmtrans
 
-
-if __name__ == "__main__":
+def learn(inputs):
     # Collect the input data
-    inputs = get_inputs()
     train_data         = inputs[0]
     word_to_indices    = inputs[1]
-    tags_to_indices   = inputs[2]
+    tags_to_indices    = inputs[2]
     out_init_prob      = inputs[3]
     out_emit_matx      = inputs[4]
     out_transition_mtx = inputs[5]
@@ -95,3 +94,7 @@ if __name__ == "__main__":
     np.savetxt(out_init_prob, init_prob, delimiter=" ")
     np.savetxt(out_emit_matx, emit_mtx, delimiter=" ")
     np.savetxt(out_transition_mtx, transition_mtx, delimiter=" ")
+
+if __name__ == "__main__":
+    inputs = get_inputs()
+    learn(inputs)

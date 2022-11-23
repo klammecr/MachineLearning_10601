@@ -1,7 +1,7 @@
 import argparse
 import numpy as np
 
-def get_inputs():
+def get_inputs(args = None):
     """
     Collects all the inputs from the command line and returns the data. To use this function:
 
@@ -27,18 +27,19 @@ def get_inputs():
         metric_file --> A file path (string) to which you should write your metrics
     """
 
-    parser = argparse.ArgumentParser()
-    
-    parser.add_argument("validation_data", type=str)
-    parser.add_argument("index_to_word", type=str)
-    parser.add_argument("index_to_tag", type=str)
-    parser.add_argument("hmminit", type=str)
-    parser.add_argument("hmmemit", type=str)
-    parser.add_argument("hmmtrans", type=str)
-    parser.add_argument("predicted_file", type=str)
-    parser.add_argument("metric_file", type=str)
+    if not args:
+        parser = argparse.ArgumentParser()
+        
+        parser.add_argument("validation_data", type=str)
+        parser.add_argument("index_to_word", type=str)
+        parser.add_argument("index_to_tag", type=str)
+        parser.add_argument("hmminit", type=str)
+        parser.add_argument("hmmemit", type=str)
+        parser.add_argument("hmmtrans", type=str)
+        parser.add_argument("predicted_file", type=str)
+        parser.add_argument("metric_file", type=str)
 
-    args = parser.parse_args()
+        args = parser.parse_args()
 
     validation_data = list()
     with open(args.validation_data, "r") as f:
