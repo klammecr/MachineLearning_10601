@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Inspection",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/small_train.tsv", "hw2/output/small_inspect.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Small Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/small_train.tsv", "hw2/handout/small_test.tsv", "2", "hw2/output/small_3_train.txt", "hw2/output/small_3_test.txt", "hw2/output/train_3_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Education Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "0", "hw2/output/edu_0_train.txt", "hw2/output/edu_0_test.txt", "hw2/output/edu_0_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Heart Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "4", "hw2/output/heart_4_train.txt", "hw2/output/heart_4_test.txt", "hw2/output/heart_4_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Plotting Max Depths, User Defined Depths",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/heart_train.tsv", "hw2/handout/heart_test.tsv", "[1,2,4]", "hw2/output"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Plotting Max Depths, All Depths for Dataset (Number of Features)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "hw2/output"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Q1",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/q1_train.tsv", "hw2/handout/q1_train.tsv", "3", "hw2/output/q1_train.txt", "hw2/output/q1_test.txt", "hw2/output/q1_metrics.txt"],
+            "justMyCode": true
+        }   
+    ]
+}

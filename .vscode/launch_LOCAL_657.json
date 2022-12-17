@@ -1,0 +1,106 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Python: Inspection",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/small_train.tsv", "hw2/output/small_inspect.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Small Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/small_train.tsv", "hw2/handout/small_test.tsv", "2", "hw2/output/small_3_train.txt", "hw2/output/small_3_test.txt", "hw2/output/train_3_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW2: Education Dataset",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["hw2/handout/education_train.tsv", "hw2/handout/education_test.tsv", "3", "hw2/output/edu_3_train.txt", "hw2/output/edu_3_test.txt", "hw2/output/edu_3_metrics.txt"],
+            "justMyCode": true
+        },
+        {
+            "name": "Python: HW4: Feature",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+            "hw4/largedata/train_large.tsv", 
+            "hw4/largedata/val_large.tsv",
+            "hw4/largedata/test_large.tsv",
+            "hw4/word2vec.txt",
+            "hw4/largeoutput/formatted_train_large.tsv",
+            "hw4/largeoutput/formatted_val_large.tsv",
+            "hw4/largeoutput/formatted_test_large.tsv"],
+            "justMyCode": true
+        },        
+        {
+            "name": "Python: HW4: Logistic Regression Large",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "hw4/largeoutput/formatted_train_large.tsv",
+                "hw4/largeoutput/formatted_val_large.tsv",
+                "hw4/largeoutput/formatted_test_large.tsv",
+                "hw4/largeoutput/formatted_train_labels.txt",
+                "hw4/largeoutput/formatted_test_labels.txt",
+                "hw4/largeoutput/formatted_metrics.txt",
+                "500",
+                "0.001"
+            ],
+            "justMyCode": true            
+        },
+        {
+            "name": "Python: HW4: Logistic Regression Small",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "hw4/smalloutput/formatted_train_small.tsv",
+                "hw4/smalloutput/formatted_val_small.tsv",
+                "hw4/smalloutput/formatted_test_small.tsv",
+                "hw4/smalloutput/formatted_train_labels.txt",
+                "hw4/smalloutput/formatted_test_labels.txt",
+                "hw4/smalloutput/formatted_metrics.txt",
+                "500",
+                "0.001"
+            ],
+            "justMyCode": true            
+        },
+        {
+            "name": "Python: HW4: Question 7",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "hw4/largeoutput/formatted_train_large.tsv",
+                "hw4/largeoutput/formatted_val_large.tsv",
+                "hw4/largeoutput/formatted_test_large.tsv",
+                "hw4/largeoutput/formatted_train_labels.txt",
+                "hw4/largeoutput/formatted_test_labels.txt",
+                "hw4/largeoutput/formatted_metrics.txt",
+                "1000",
+                "0.001"
+            ],
+            "justMyCode": true            
+        }
+    ]
+}

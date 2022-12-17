@@ -1,0 +1,10 @@
+you	D
+eat	C
+fish	D
+
+you	D
+fish	D
+eat	C
+
+eat	C
+fish	D
