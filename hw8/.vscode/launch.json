@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "mc", "raw", "mc_raw_weight.txt", "mc_raw_returns.txt",
+                "4", "200", "0.05", "0.99", "0.01"
+            ]
+        },
+        {
+            "name": "Tile Grid World",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "gw", "tile", "gw_weight.txt", "gw_returns.txt",
+                "3", "5", "0.0", "0.9", "0.01"
+            ]
+        },
+        {
+            "name": "Tile MC",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args" : [
+                "mc", "tile", "mc_tile_weight.txt",
+                "mc_tile_returns.txt", "25", "200", "0.0", "0.99", "0.005"
+            ]
+        }
+    ]
+}
